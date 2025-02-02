@@ -6,8 +6,8 @@ TOKEN = "7695223229:AAHaPsDVYwJZ4OsfmPUE43dKG_YYiPA_TXI"
 
 bot = telebot.TeleBot(TOKEN)
 
-video_path = 'Assets\Prohibido.mp4'
-image_path = 'Assets\pendejutria.jpg'
+video_path = "Assets/Prohibido.mp4"
+image_path = "Assets/pendejutria.jpg"
 
 respuestas_usuarios = {}
 
