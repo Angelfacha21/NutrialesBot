@@ -14,14 +14,17 @@ respuestas_usuarios = {}
 # Handle '/start' and '/help'
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    markup = types.InlineKeyboardMarkup(row_width=2)
+    markup = types.InlineKeyboardMarkup(row_width=3)
     
     # Create bottons
-    btn_y = types.InlineKeyboardButton('Si', callback_data='si')
-    btn_n = types.InlineKeyboardButton('No', callback_data='no')
+    btn_y = types.InlineKeyboardButton('Dietas 🍽️', callback_data='si')
+    btn_n = types.InlineKeyboardButton('NO', callback_data='no') 
+    btn_a = types.InlineKeyboardButton('Alergias ⚒️', callback_data='a') 
+    btn_ay = types.InlineKeyboardButton('Ayuda', callback_data='ay') 
+    btn_i = types.InlineKeyboardButton('❗INFORMACIÓN❗', callback_data='i') 
     
     # Add bottons markup
-    markup.add(btn_y, btn_n)
+    markup.add(btn_y, btn_a, btn_ay, btn_n, btn_i)
     
     bot.reply_to(message, "¡Hola, hola! ¡Soy el Dr. Nutriales, tu nuevo compañero en esta emocionante aventura de salud y alimentación! Prepárate para descubrir juntos los secretos de una vida más sana y divertida. ¡No te preocupes, no te voy a aburrir con charlas complicadas ni dietas imposibles! Mi misión es hacerte sentir genial, ¡así que vamos a ponerle sabor y alegría a tu bienestar!", reply_markup=markup)
 
@@ -35,11 +38,20 @@ def callback_query(call):
         respuestas_usuarios[chat_id] = {}
     print(f"Callback data: {call.data}")
     chat_id = call.message.chat.id
-
-    if call.data == 'no':
-        send_shit(call.message)
     
-    elif call.data in ['si']:
+    if call.data == 'i':
+        send_info(call.message)
+
+    elif call.data == 'a':
+        send_image(call.message)
+
+    elif call.data == 'ay':
+        send_help(call.message)
+
+    elif call.data == 'no':
+        send_shit(call.message)
+
+    elif call.data == 'si':
         send_years(call.message)
 
     elif call.data in ['OPA', 'OPB', 'OPC']:
@@ -77,15 +89,16 @@ def callback_query(call):
 
 @bot.message_handler(commands=['help'])
 def send_help(message):
-    bot.reply_to(message, """\
-¡Ups! Parece que las cosas se pusieron un poco raras por aquí. ¡Pero no te preocupes, Nutriales está al rescate! Sin pánico, estoy aquí para ayudarte a resolver cualquier problema sin que te dé un ataque al corazón.
-¿Qué te trae por aquí? ¡Cuéntame tus problemas con confianza! Y no te preocupes por el "imbécil" que me programó, ¡todos tenemos nuestros días! Lo importante es que estoy aquí para echarte una mano (o una pata, como prefieras).
-\
+    bot.reply_to(message, f"""\
+¡Ups! Parece que las cosas se pusieron un poco raras por aquí. ¡Pero no te preocupes, Nutriales está al rescate! Sin pánico, estoy aquí para ayudarte a resolver cualquier problema sin que te dé un ataque al corazón. \n
+¿Qué te trae por aquí? ¡Cuéntame tus problemas con confianza! Cualquier cosa reclamale al "tarado" ese que me programó, ¡todos tenemos nuestros días! Lo importante es que estoy aquí para echarte una mano (o una pata, como prefieras). \n
+Cualquier sugerencia o problema que estes teniendo hazmela saber en: docnutriales@gmail.com \
 """)
 
 @bot.message_handler(commands=['restart'])
 def send_restart(message):
-    bot.reply_to(message, """¿Qué ha sucedido? No queda de otra... He we go again""")
+    bot.send_message(message.chat.id, f"""¿Qué ha sucedido? No nos queda de otra... He we go again""")
+    send_welcome(message)
 
 def send_video(message):
     try:
@@ -96,13 +109,30 @@ def send_video(message):
         print(f"Error al enviar el video: {e}")
 
 
+def send_info(message):
+    bot.send_message(message.chat.id, f"""⚠️ AVISO LEGAL ⚠️ \n
+Este bot, Nutriales, ha sido creado con fines educativos y de entretenimiento. La información suministrada a través de este servicio no debe ser interpretada como asesoramiento médico, nutricional o de salud profesional. Aunque hacemos esfuerzos para asegurar que la información proporcionada sea precisa y actualizada, no garantizamos su exactitud ni completitud. \n
+
+LIMITACIÓN DE RESPONSABILIDAD \n
+No nos hacemos responsables por cualquier acción tomada basada en la información proporcionada por Nutriales. El uso de esta información es bajo su propio riesgo. \n
+
+DERECHOS DE AUTOR ©️ \n
+Todo el contenido y material proporcionado por Nutriales está protegido por derechos de autor y no puede ser reproducido, distribuido o utilizado sin el permiso expreso del autor. \n
+
+MODIFICAIONES Y TERMINACIÓN \n
+Nos reservamos el derecho de modificar, suspender o terminar el acceso a este bot en cualquier momento y por cualquier motivo, sin previo aviso.
+""")
+
 def send_image(message):
     image = open(image_path, 'rb')
-    bot.send_photo(message.chat.id, image, caption="⚒️⚙️¡Vaya, parece que me pillaste en medio de una actualización! ⚙ ¡Pero no te preocupes, la información que necesitas está en camino! Mientras tanto, puedes usar el comando /help para descubrir los secretos que ya conozco. ¡Te prometo que la espera valdrá la pena!⚒️⚙️")
+    bot.send_photo(message.chat.id, image, caption="⚒️⚙️¡Vaya, parece que me pillaste en medio de una actualización! ¡Pero no te preocupes, la información que necesitas está en camino! Mientras tanto, puedes usar el comando /help para descubrir los secretos que ya conozco. ¡Te prometo que la espera valdrá la pena!⚒️⚙️")
 
 def send_shit(message):
     bot.send_message(message.chat.id, "Pensé que querias mi ayuda, me ha dolido en mi nutricorazón esta traición")
 
+#def send_aler(message):
+#    image = open(image_path, 'rb')
+#    bot.send_photo(message.chat.id, image, caption="¡Oh, me atrapaste en plena sesión de programación! 💻 Pero no te preocupes, la información que necesitas está en camino, solo falta un poco más de magia codificadora. Mientras tanto, prueba el comando /help para explorar los misterios que ya tengo listos. ¡Te aseguro que la espera valdrá cada byte!")
 
 def send_gender(message):
     markup = types.InlineKeyboardMarkup(row_width=2)
@@ -159,7 +189,6 @@ def send_intentions(message):
     markup.add(btn_su, btn_ma, btn_ba)
     
     bot.send_message(message.chat.id, "¿Quieres perder peso? ¿Ganar masa muscular? ¿Simplemente comer más sano y sentirte con más energía? ¡Cuéntame tus sueños y metas!", reply_markup=markup)
-        
 
 def procesar_respuestas(call):
     chat_id = call.message.chat.id
