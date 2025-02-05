@@ -90,7 +90,7 @@ def callback_query(call):
 
 @bot.message_handler(commands=['help'])
 def send_help(message):
-    bot.reply_to(message, f"""\
+    bot.send_message(message.chat.id, f"""\
 ¡Ups! Parece que las cosas se pusieron un poco raras por aquí. ¡Pero no te preocupes, Nutriales está al rescate! Sin pánico, estoy aquí para ayudarte a resolver cualquier problema sin que te dé un ataque al corazón. \n
 ¿Qué te trae por aquí? ¡Cuéntame tus problemas con confianza! Cualquier cosa reclamale al "tarado" ese que me programó, ¡todos tenemos nuestros días! Lo importante es que estoy aquí para echarte una mano (o una pata, como prefieras). \n
 Cualquier sugerencia o problema que estes teniendo hazmela saber en: docnutriales@gmail.com \
