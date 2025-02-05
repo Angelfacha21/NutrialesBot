@@ -18,15 +18,15 @@ def send_welcome(message):
     
     # Create bottons
     btn_y = types.InlineKeyboardButton('Dietas 🍽️', callback_data='si')
-    btn_n = types.InlineKeyboardButton('NO', callback_data='no') 
+    btn_n = types.InlineKeyboardButton('NO 😡', callback_data='no') 
     btn_a = types.InlineKeyboardButton('Alergias ⚒️', callback_data='a') 
-    btn_ay = types.InlineKeyboardButton('Ayuda', callback_data='ay') 
+    btn_ay = types.InlineKeyboardButton('Ayuda 🫂', callback_data='ay') 
     btn_i = types.InlineKeyboardButton('❗INFORMACIÓN❗', callback_data='i') 
     
     # Add bottons markup
     markup.add(btn_y, btn_a, btn_ay, btn_n, btn_i)
     
-    bot.reply_to(message, "¡Hola, hola! ¡Soy el Dr. Nutriales, tu nuevo compañero en esta emocionante aventura de salud y alimentación! Prepárate para descubrir juntos los secretos de una vida más sana y divertida. ¡No te preocupes, no te voy a aburrir con charlas complicadas ni dietas imposibles! Mi misión es hacerte sentir genial, ¡así que vamos a ponerle sabor y alegría a tu bienestar!", reply_markup=markup)
+    bot.reply_to(message, "¡Hola, hola! ¡Soy el Dr. Nutriales, tu nuevo compañero en esta emocionante aventura de salud y alimentación! Prepárate para descubrir juntos los secretos de una vida más sana y divertida. ¡No te preocupes, no te voy a aburrir con charlas complicadas ni dietas imposibles! Mi misión es hacerte sentir genial, ¡así que vamos a ponerle sabor y alegría a tu bienestar! \n ¿Necesitas ayudas en... ?", reply_markup=markup)
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -125,10 +125,10 @@ Nos reservamos el derecho de modificar, suspender o terminar el acceso a este bo
 
 def send_image(message):
     image = open(image_path, 'rb')
-    bot.send_photo(message.chat.id, image, caption="⚒️⚙️¡Vaya, parece que me pillaste en medio de una actualización! ¡Pero no te preocupes, la información que necesitas está en camino! Mientras tanto, puedes usar el comando /help para descubrir los secretos que ya conozco. ¡Te prometo que la espera valdrá la pena!⚒️⚙️")
+    bot.send_photo(message.chat.id, image, caption="⚒️⚙️ ¡Vaya, parece que me pillaste en medio de una actualización! ¡Pero no te preocupes, la información que necesitas está en camino! \n Mientras tanto, puedes usar el comando /help para descubrir los secretos que ya conozco. ¡Te prometo que la espera valdrá la pena!⚒️⚙️")
 
 def send_shit(message):
-    bot.send_message(message.chat.id, "Pensé que querias mi ayuda, me ha dolido en mi nutricorazón esta traición")
+    bot.send_message("""message.chat.id,Pensé que querías mi ayuda, ¡me ha dolido en mi nutricorazón esta traición! Pero no te preocupes, ya me he comido un snack para curar mis penas y estoy listo para volver a la acción. ¡Volvamos a empezar, sin dramas esta vez!""")
 
 #def send_aler(message):
 #    image = open(image_path, 'rb')
@@ -335,6 +335,6 @@ Para perder peso, se deben priorizar los ejercicios que aumentan el gasto calór
 """)
 
     else:
-        bot.send_message(chat_id, f"Disculpa pero no suministraste toda la información que necesito :(, intentalo de nuevo con /start")
+        bot.send_message(chat_id, f"Disculpa pero no suministraste toda la información que necesito :(, intentalo de nuevo con /restart")
 
 bot.polling()
