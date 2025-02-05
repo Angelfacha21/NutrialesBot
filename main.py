@@ -7,7 +7,8 @@ TOKEN = "7695223229:AAHaPsDVYwJZ4OsfmPUE43dKG_YYiPA_TXI"
 bot = telebot.TeleBot(TOKEN)
 
 video_path = "Assets/Prohibido.mp4"
-image_path = "Assets/pendejutria.jpg"
+image_path = "Assets/pendejutria.jpg" 
+image_path1 = "Assets/nutriasad.jpg" 
 
 respuestas_usuarios = {}
 
@@ -128,7 +129,8 @@ def send_image(message):
     bot.send_photo(message.chat.id, image, caption="⚒️⚙️ ¡Vaya, parece que me pillaste en medio de una actualización! ¡Pero no te preocupes, la información que necesitas está en camino! \n Mientras tanto, puedes usar el comando /help para descubrir los secretos que ya conozco. ¡Te prometo que la espera valdrá la pena!⚒️⚙️")
 
 def send_shit(message):
-    bot.send_message("""message.chat.id,Pensé que querías mi ayuda, ¡me ha dolido en mi nutricorazón esta traición! Pero no te preocupes, ya me he comido un snack para curar mis penas y estoy listo para volver a la acción. ¡Volvamos a empezar, sin dramas esta vez!""")
+    image1 = open(image_path1, 'rb')
+    bot.send_photo(message.chat.id, image1, caption="""Pensé que querías mi ayuda, ¡me ha dolido en mi nutricorazón esta traición! Pero no te preocupes, ya me he comido un snack para curar mis penas y estoy listo para volver a la acción. ¡Volvamos a empezar, sin dramas esta vez!""")
 
 #def send_aler(message):
 #    image = open(image_path, 'rb')
