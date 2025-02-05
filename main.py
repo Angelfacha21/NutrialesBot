@@ -6,8 +6,8 @@ TOKEN = "7695223229:AAHaPsDVYwJZ4OsfmPUE43dKG_YYiPA_TXI"
 
 bot = telebot.TeleBot(TOKEN)
 
-video_path = 'Assets\Prohibido.mp4'
-image_path = 'Assets\pendejutria.jpg'
+video_path = "Assets/Prohibido.mp4"
+image_path = "Assets/pendejutria.jpg"
 
 respuestas_usuarios = {}
 
@@ -23,7 +23,7 @@ def send_welcome(message):
     # Add bottons markup
     markup.add(btn_y, btn_n)
     
-    bot.reply_to(message, "¡Hola! Soy el Dr. Nutriales. Lamento informarte que a partir de hoy seré tu NutriCompañero en el mundo de la salud y la alimentación. Mi misión es ayudarte a estar en forma.", reply_markup=markup)
+    bot.reply_to(message, "¡Hola, hola! ¡Soy el Dr. Nutriales, tu nuevo compañero en esta emocionante aventura de salud y alimentación! Prepárate para descubrir juntos los secretos de una vida más sana y divertida. ¡No te preocupes, no te voy a aburrir con charlas complicadas ni dietas imposibles! Mi misión es hacerte sentir genial, ¡así que vamos a ponerle sabor y alegría a tu bienestar!", reply_markup=markup)
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -78,9 +78,14 @@ def callback_query(call):
 @bot.message_handler(commands=['help'])
 def send_help(message):
     bot.reply_to(message, """\
-Oh oh, parece que algo no anda bien. Pero no te preocupes, Nutriales está aquí para resolverlo sin causarte un infarto... ¿En qué puedo echarte una pata? Una disculpa el imbecil que me programo no coloco nada acá
+¡Ups! Parece que las cosas se pusieron un poco raras por aquí. ¡Pero no te preocupes, Nutriales está al rescate! Sin pánico, estoy aquí para ayudarte a resolver cualquier problema sin que te dé un ataque al corazón.
+¿Qué te trae por aquí? ¡Cuéntame tus problemas con confianza! Y no te preocupes por el "imbécil" que me programó, ¡todos tenemos nuestros días! Lo importante es que estoy aquí para echarte una mano (o una pata, como prefieras).
 \
 """)
+
+@bot.message_handler(commands=['restart'])
+def send_restart(message):
+    bot.reply_to(message, """¿Qué ha sucedido? No queda de otra... He we go again""")
 
 def send_video(message):
     try:
@@ -93,10 +98,10 @@ def send_video(message):
 
 def send_image(message):
     image = open(image_path, 'rb')
-    bot.send_photo(message.chat.id, image, caption="⚒️⚙️Lo sentimos pero por el momento no tenemos la información suficiente para suministrarte, seguimos en desarrollo...  Utiliza el comando /help para obtener más información⚒️⚙️")
+    bot.send_photo(message.chat.id, image, caption="⚒️⚙️¡Vaya, parece que me pillaste en medio de una actualización! ⚙ ¡Pero no te preocupes, la información que necesitas está en camino! Mientras tanto, puedes usar el comando /help para descubrir los secretos que ya conozco. ¡Te prometo que la espera valdrá la pena!⚒️⚙️")
 
 def send_shit(message):
-    bot.send_message(message.chat.id, "Puedes irte a comer una bien sucia, la consulta fueron 10$")
+    bot.send_message(message.chat.id, "Pensé que querias mi ayuda, me ha dolido en mi nutricorazón esta traición")
 
 
 def send_gender(message):
@@ -107,7 +112,7 @@ def send_gender(message):
 
     markup.add(btn_H, btn_M)
     
-    bot.send_message(message.chat.id, "La pregunta más importante... ¿Eres Hombre o Mujer?", reply_markup=markup)
+    bot.send_message(message.chat.id, "¡Ajá! ¡La pregunta del millón! ¿Eres hombre o mujer? ¡O tal vez algo intermedio! ¡O quizás eres un ser de otro planeta que no encaja en ninguna de estas categorías! ¡No te preocupes, no te juzgaré! ¡Solo necesito saberlo para poder personalizar tu experiencia NutriCompañero!", reply_markup=markup)
 
 def send_years(message):
     markup = types.InlineKeyboardMarkup(row_width=3)
@@ -118,7 +123,7 @@ def send_years(message):
     
     markup.add(btn_18, btn_19_30, btn_31_50)
     
-    bot.send_message(message.chat.id, "Buenísimo, ahora necesito saber ¿cuántos años tienes?", reply_markup=markup)
+    bot.send_message(message.chat.id, "¡Genial! Ahora, ¿cuántos años tienes? ¡Solo necesito saberlo para ayudarte a estar en forma!", reply_markup=markup)
 
 def send_stature(message):
     markup = types.InlineKeyboardMarkup(row_width=3)
@@ -129,7 +134,7 @@ def send_stature(message):
     
     markup.add(btn_menor_150, btn_150_170, btn_mayor_170)
     
-    bot.send_message(message.chat.id, "Gracias por compartir tu edad. Ahora, ¿cuánto mides?", reply_markup=markup)
+    bot.send_message(message.chat.id, "Necesito saber tu estatura para ajustar nuestros planes de salud. ¿Eres un gigante que toca el techo o alguien que se esconde en las multitudes? ", reply_markup=markup)
 
 def send_weight(message):
     markup = markup = types.InlineKeyboardMarkup(row_width=4)
@@ -141,7 +146,7 @@ def send_weight(message):
 
     markup.add(btn_menos_60, btn_entre_80, btn_hasta_120, btn_mas_120)
     
-    bot.send_message(message.chat.id, "Disculpa que te pregunte pero... Cuanto pesas?", reply_markup=markup)
+    bot.send_message(message.chat.id, "¡Es hora de hablar de números! ¿Cuánto marca la báscula? ¡No te preocupes, todos tenemos nuestro peso ideal! ¡Lo importante es estar saludables y felices!", reply_markup=markup)
 
 
 def send_intentions(message):
@@ -153,7 +158,7 @@ def send_intentions(message):
     
     markup.add(btn_su, btn_ma, btn_ba)
     
-    bot.send_message(message.chat.id, "Vamos bien, necesito saber cual es tu objetivo", reply_markup=markup)
+    bot.send_message(message.chat.id, "¿Quieres perder peso? ¿Ganar masa muscular? ¿Simplemente comer más sano y sentirte con más energía? ¡Cuéntame tus sueños y metas!", reply_markup=markup)
         
 
 def procesar_respuestas(call):
@@ -169,141 +174,136 @@ def procesar_respuestas(call):
     print(resumen)
     print(respuestas_usuarios)
 
-    bot.send_message(chat_id, resumen)
+    #bot.send_message(chat_id, resumen)
 
     if genero == 'H' and edad == 'OPA' and intenciones == 'SP':
         bot.send_message(chat_id, f"""Desayuno:
-Batido de proteínas con leche entera, plátano y avena (50 g).
-Dos huevos revueltos.
-Almuerzo:
-Hamburguesa de carne magra (150 g) en pan integral.
-Papas al horno (150 g).
-Cena:
-Filete de salmón (150 g) con arroz integral (100 g).
-Ensalada mixta.
+Desayuno: Tostadas integrales con aguacate y huevo revuelto. \n
+Almuerzo: Hamburguesa de pavo con pan integral, lechuga, tomate y batatas al horno. \n
+Cena: Arroz integral con salmón a la parrilla y brócoli al vapor. \n
 Para aumentar de peso, especialmente en forma de masa muscular, es crucial enfocarse en ejercicios de resistencia. Como las sentadillas, levantamiento de pesa, flexiones y dominadas.
+Recuerda que son recomendaciones, mejorare las dietas y rutina en cuestión de tiempo
 """)
     
     elif genero == 'H' and edad == 'OPA' and intenciones == 'MP':
-        bot.send_message(chat_id, f"""Desayuno:
-Yogur natural (150 g) con una cucharada de miel y fresas (100 g).
-Tostada integral con aguacate.
-Almuerzo:
-Ensalada de atún (100 g) con lechuga, tomate y pepino.
-Quinoa (50 g) cocida.
-Cena:
-Pechuga de pollo a la plancha (120 g) con verduras al vapor.
-Una manzana como postre.
-Se recomienda una actividad física moderada para no perder peso, algunos ejercicios que pueden servir pueden ser natacion y caminatas ligeras.
+        bot.send_message(chat_id, f"""Desayuno: Yogur griego con granola y fruta fresca. \n
+Almuerzo: Wrap integral de pollo a la parrilla con espinacas. \n
+Cena: Pasta integral con salsa pesto y tomates cherry. \n
+Se recomienda una actividad física moderada para no perder peso, algunos ejercicios que pueden servir pueden ser natacion moderada y caminatas ligeras.
 """)
 
     elif genero == 'H' and edad == 'OPA' and intenciones == 'BP':
-        bot.send_message(chat_id, f"""Avena cocida (40 g) con agua y canela.
-Un té sin azúcar.
-Almuerzo:
-Pechuga de pavo (120 g) con espárragos al vapor.
-Ensalada de espinacas.
-Cena:
-Pescado blanco al horno (120 g) con brócoli.
-Una naranja como postre.
+        bot.send_message(chat_id, f"""Desayuno: Batido verde (espinacas, plátano y agua). \n
+Almuerzo: Wrap integral de pavo con verduras frescas. \n
+Cena: Pescado al horno con quinoa y espinacas salteadas. \n
 Para perder peso, se deben priorizar los ejercicios que aumentan el gasto calórico. Algunas opciones eficaces son: correr o andar en bicicleta
 """)
 
     elif genero == 'H' and edad == 'OPB' and intenciones == 'SP':
-        bot.send_message(chat_id, f"""Desayuno:
-Tostadas integrales con mantequilla de maní y plátano.
-Almuerzo:
-Pasta integral (100 g) con salsa boloñesa (carne magra).
-Cena:
-Pizza casera con abundantes vegetales y queso.
+        bot.send_message(chat_id, f"""Desayuno: Tortilla de tres huevos con espinacas y queso feta. \n
+Almuerzo: Ensalada César con pollo a la parrilla y pan crujiente. \n
+Cena: Pizza casera con masa integral, verduras y pepperoni. \n
 Para aumentar de peso, especialmente en forma de masa muscular, es crucial enfocarse en ejercicios de resistencia. Como las sentadillas, levantamiento de pesa, flexiones y dominadas.
 """)
 
     elif genero == 'H' and edad == 'OPB' and intenciones == 'MP':
-        bot.send_message(chat_id, f"""Desayuno:
-Smoothie de frutas con yogur natural.
-Almuerzo:
-Pollo asado (100 g) con ensalada verde.
-Cena:
-Tortilla española con verduras.
-Se recomienda una actividad física moderada para no perder peso, algunos ejercicios que pueden servir pueden ser natacion y caminatas ligeras.
+        bot.send_message(chat_id, f"""Desayuno: Tortilla española (huevo y patata). \n
+Almuerzo: Ensalada mediterránea (tomate, pepino, feta). \n
+Cena: Filete a la parrilla acompañado por puré de patatas. \n
+Se recomienda una actividad física moderada para no perder peso, algunos ejercicios que pueden servir pueden ser natacion moderada y caminatas ligeras
 """)
 
     elif genero == 'H' and edad == 'OPB' and intenciones == 'BP':
-        bot.send_message(chat_id, f"""Desayuno:
-Yogur griego bajo en grasa con semillas.
-Almuerzo:
-Ensalada grande con garbanzos y aderezo ligero.
-Cena:
-Sopa de verduras y una pechuga pequeña a la plancha.
+        bot.send_message(chat_id, f"""Desayuno: Omelette de claras de huevo con champiñones. \n
+Almuerzo: Ensalada de garbanzos con pepino y tomate. \n
+Cena: Pechuga de pavo al horno con espárragos asados. \n
 Para perder peso, se deben priorizar los ejercicios que aumentan el gasto calórico. Algunas opciones eficaces son: correr o andar en bicicleta
 """)
     
     elif genero == 'H' and edad == 'OPC' and intenciones == 'SP':
-        bot.send_message(chat_id, f"""Desayuno:
-Avena cocida con leche descremada y frutas.
-Almuerzo:
-Filete de pollo a la plancha con puré de patatas.
-Cena:
-Verduras asadas y una porción pequeña de quinoa.
-Se recomienda una actividad física moderada para no perder peso, algunos ejercicios que pueden servir pueden ser natacion y caminatas ligeras.
+        bot.send_message(chat_id, f"""Desayuno: Avena cocida con nueces y plátano. \n
+Almuerzo: Ensalada de atún con garbanzos y aderezo de yogur. \n
+Cena: Pollo al horno con arroz basmati y espárragos. \n
+Para aumentar de peso, especialmente en forma de masa muscular, es crucial enfocarse en ejercicios de resistencia. Como las sentadillas, levantamiento de pesa, flexiones y dominadas.
 """)
     
     elif genero == 'H' and edad == 'OPC' and intenciones == 'MP':
-        bot.send_message(chat_id, f"Continue")
-        send_image(call.message)
+        bot.send_message(chat_id, f"""Desayuno: Smoothie proteico (plátano y espinacas). \n
+Almuerzo: Hamburguesa magra en pan integral sin mayonesa. \n
+Cena: Pollo asado acompañado por verduras al vapor. \n
+Se recomienda una actividad física moderada para no perder peso, algunos ejercicios que pueden servir pueden ser natacion moderada y caminatas ligeras.
+""")
 
     elif genero == 'H' and edad == 'OPC' and intenciones == 'BP':
-        bot.send_message(chat_id, f"""Desayuno:
-Smoothie verde (espinacas, plátano, agua).
-Almuerzo:
-Ensalada César ligera sin crutones y pollo a la parrilla.
-Cena:
-Pescado al vapor con espárragos y limón.
+        bot.send_message(chat_id, f"""Desayuno: Avena cocida solo en agua o leche baja en grasa. \n
+Almuerzo: Ensalada mixta sin aderezo o aderezo ligero. \n
+Cena: Pollo al grill acompañado por verduras asadas. \n
 Para perder peso, se deben priorizar los ejercicios que aumentan el gasto calórico. Algunas opciones eficaces son: correr o andar en bicicleta
 """)
-    
+
     elif genero == 'M' and edad == 'OPA' and intenciones == 'SP':
-        bot.send_message(chat_id, f"Continue")
-        send_image(call.message)
+        bot.send_message(chat_id, f"""Desayuno: Batido de plátano con leche entera, avena y mantequilla de maní. \n
+Almuerzo: Ensalada de pollo con quinoa, aguacate y aderezo de aceite de oliva. \n
+Cena: Pasta integral con salsa de tomate, carne molida magra y queso parmesano. \n
+Para aumentar de peso, especialmente en forma de masa muscular, es crucial enfocarse en ejercicios de resistencia. Como las sentadillas, levantamiento de pesa, flexiones y dominadas.
+Recuerda que son recomendaciones, mejorare las dietas y rutina en cuestión de tiempo
+""")
 
     elif genero == 'M' and edad == 'OPA' and intenciones == 'MP':
-        bot.send_message(chat_id, f"Continue")
-        send_image(call.message)
+        bot.send_message(chat_id, f"""Desayuno: Tostadas integrales con aguacate y huevo poché. \n
+Almuerzo: Quinoa con verduras asadas y garbanzos. \n
+Cena: Salteado de pollo con arroz integral y brócoli. \n
+Se recomienda una actividad física moderada para no perder peso, algunos ejercicios que pueden servir pueden ser natacion moderada y caminatas ligeras.
+""")
 
     elif genero == 'M' and edad == 'OPA' and intenciones == 'BP':
-        bot.send_message(chat_id, f"""Desayuno:
-Batido energético con leche, avena, plátano y mantequilla de almendra.
-Almuerzo:
-Lentejas guisadas (150 g) con arroz integral.
-Cena:
-Salteado de tofu y verduras sobre arroz basmati
-Para aumentar de peso, especialmente en forma de masa muscular, es crucial enfocarse en ejercicios de resistencia. Como las sentadillas, levantamiento de pesa, flexiones y dominadas.
+        bot.send_message(chat_id, f"""Desayuno: Avena cocida con frutas frescas y canela. \n
+Almuerzo: Ensalada mixta con atún, lechuga, tomate y vinagreta. \n
+Cena: Pechuga de pollo a la plancha con verduras al vapor. \n
+Para perder peso, se deben priorizar los ejercicios que aumentan el gasto calórico. Algunas opciones eficaces son: correr o andar en bicicleta 
 """)
 
     elif genero == 'M' and edad == 'OPB' and intenciones == 'SP':
-        bot.send_message(chat_id, f"Continue")
-        send_image(call.message)
+        bot.send_message(chat_id, f"""Desayuno: Yogur griego con granola, frutos secos y miel. \n
+Almuerzo: Wrap de pollo con espinacas, hummus y pimientos asados. \n
+Cena: Tacos de carne asada con frijoles negros y guacamole. \n
+Para aumentar de peso, especialmente en forma de masa muscular, es crucial enfocarse en ejercicios de resistencia. Como las sentadillas, levantamiento de pesa, flexiones y dominadas.
+""")
 
     elif genero == 'M' and edad == 'OPB' and intenciones == 'MP':
-        bot.send_message(chat_id, f"Continue")
-        send_image(call.message)
+        bot.send_message(chat_id, f"""Desayuno: Avena cocida con frutas secas. \n
+Almuerzo: Pollo a la parrilla sobre una cama de espinacas frescas. \n
+Cena: Pescado al horno acompañado por quinoa. \n
+Se recomienda una actividad física moderada para no perder peso, algunos ejercicios que pueden servir pueden ser natacion moderada y caminatas ligeras.
+""")
 
     elif genero == 'M' and edad == 'OPB' and intenciones == 'BP':
-        bot.send_message(chat_id, f"Continue")
-        send_image(call.message)
+        bot.send_message(chat_id, f"""Desayuno: Yogur natural con frutos rojos. \n
+Almuerzo: Sopa de verduras casera. \n
+Cena: Tofu salteado con brócoli y arroz integral. \n
+Para perder peso, se deben priorizar los ejercicios que aumentan el gasto calórico. Algunas opciones eficaces son: correr o andar en bicicleta
+""")
 
     elif genero == 'M' and edad == 'OPC' and intenciones == 'SP':
-        bot.send_message(chat_id, f"Continue")
-        send_image(call.message)
+        bot.send_message(chat_id, f"""Desayuno: Smoothie de frutas con yogur griego y avena. \n
+Almuerzo: Sopa de lentejas con pan integral. \n
+Cena: Filete de ternera con puré de patatas y judías verdes. \n
+Para aumentar de peso, especialmente en forma de masa muscular, es crucial enfocarse en ejercicios de resistencia. Como las sentadillas, levantamiento de pesa, flexiones y dominadas.
+""")
 
     elif genero == 'M' and edad == 'OPC' and intenciones == 'MP':
-        bot.send_message(chat_id, f"Continue")
-        send_image(call.message)
+        bot.send_message(chat_id, f"""Desayuno: Batido de proteínas con frutas. \n
+Almuerzo: Sopa minestrone rica en vegetales. \n
+Cena: Salteado de tofu con verduras mixtas. \n
+Se recomienda una actividad física moderada para no perder peso, algunos ejercicios que pueden servir pueden ser natacion moderada y caminatas ligeras.
+""")
 
     elif genero == 'M' and edad == 'OPC' and intenciones == 'BP':
-        bot.send_message(chat_id, f"Continue")
-        send_image(call.message)
+        bot.send_message(chat_id, f"""Desayuno: Smoothie de bayas sin azúcar añadido. \n
+Almuerzo: Ensalada César ligera (sin aderezo cremoso). \n
+Cena: Filete de pescado a la parrilla con espinacas al vapor. \n
+Para perder peso, se deben priorizar los ejercicios que aumentan el gasto calórico. Algunas opciones eficaces son: correr o andar en bicicleta
+""")
 
     else:
         bot.send_message(chat_id, f"Disculpa pero no suministraste toda la información que necesito :(, intentalo de nuevo con /start")
